@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
 
-import { Ionicons, Entypo,EvilIcons,MaterialIcons , FontAwesome5 } from '@expo/vector-icons';
+import { Ionicons, Entypo, EvilIcons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
@@ -27,28 +27,28 @@ export default function BottomTabNavigator() {
         name="Home"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <Entypo name="home" style={{ marginBottom: -3 }}   size={30} color={color} />,
+          tabBarIcon: ({ color }) => <Entypo name="home" style={{ marginBottom: -3 }} size={30} color={color} />,
         }}
       />
       <BottomTab.Screen
         name="Search"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <EvilIcons name="search" style={{ marginBottom: -3 }}   size={30} color={color}/>,
+          tabBarIcon: ({ color }) => <EvilIcons name="search" style={{ marginBottom: -3 }} size={30} color={color} />,
         }}
       />
       <BottomTab.Screen
         name="Your Library"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <MaterialIcons  name="library-music"   size={30} color={color}/>,
+          tabBarIcon: ({ color }) => <MaterialIcons name="library-music" size={30} color={color} />,
         }}
       />
       <BottomTab.Screen
         name="Premium"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <FontAwesome5 name="spotify" style={{ marginBottom: -3 }}   size={30} color={color}/>,
+          tabBarIcon: ({ color }) => <FontAwesome5 name="spotify" style={{ marginBottom: -3 }} size={30} color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -71,7 +71,7 @@ function TabOneNavigator() {
       <TabOneStack.Screen
         name="TabOneScreen"
         component={HomeScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+        options={{ headerTitle: 'Home' }}
       />
     </TabOneStack.Navigator>
   );
