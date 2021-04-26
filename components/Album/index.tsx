@@ -1,5 +1,7 @@
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native'
+
 import { Album as Albumtype } from '../../types'
 import styles from "./styles"
 
@@ -9,12 +11,21 @@ export type AlbumProps = {
 }
 
 const Album = (props: AlbumProps) => {
+
+    const navigation = useNavigation();
+
+    const onPress = () => {
+
+        navigation.navigate("AlbumScreen", { id: props.album.id })
+    }
+
     return (
-        <View style={styles.container}>
-            {/* Image , Artist Headline */}
-            <Image source={{ uri: props.album.imageUri }} style={styles.image} />
-            <Text style={styles.text}>{props.album.artistsHeadline}</Text>
-        </View>
+        <TouchableWithoutFeedback onPress={onPress}>
+            <View style={styles.container}>
+                <Image source={{ uri: props.album.imageUri }} style={styles.image} />
+                <Text style={styles.text}>{props.album.artistsHeadline}</Text>
+            </View>
+        </TouchableWithoutFeedback>
     )
 }
 
