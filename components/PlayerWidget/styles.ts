@@ -3,7 +3,6 @@ import Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: "row",
 
         position: "absolute",
         bottom: 45,
@@ -11,8 +10,12 @@ const styles = StyleSheet.create({
         width: "100%",
         borderWidth: 2,
         borderColor: "black",
-        alignItems: "center"
 
+
+
+    },
+    row: {
+        flexDirection: "row",
 
     },
     rightContainer: {
@@ -51,6 +54,10 @@ const styles = StyleSheet.create({
         height: 75,
         marginRight: 10
 
+    },
+    progress: {
+        height: 3,
+        backgroundColor: "#bcbcbc"
     }
 })
 
