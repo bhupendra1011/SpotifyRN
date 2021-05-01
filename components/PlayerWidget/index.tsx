@@ -4,17 +4,32 @@ import { Text, View, Image, TouchableOpacity } from 'react-native'
 import { Audio } from "expo-av"
 import styles from "./styles"
 import { Sound } from 'expo-av/build/Audio'
+import { AppContext } from '../../AppContext'
 
-const song = {
-    id: '1',
-    uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    imageUri: 'https://cache.boston.com/resize/bonzai-fba/Globe_Photo/2011/04/14/1302796985_4480/539w.jpg',
-    title: 'High on You',
-    artist: 'Helen',
-}
+import { getSong } from '../../src/graphql/queries'
+import { API, graphqlOperation } from "aws-amplify"
+
 
 const PlayerWidget = () => {
 
+    const { songId } = React.useContext(AppContext);
+    const [song, setSong] = React.useState(null);
+
+
+    React.useEffect(
+        () => {
+            const fetchSong = async () => {
+                try {
+                    const data = await API.graphql(graphqlOperation(getSong, { id: songId }))
+                    setSong(data.data.getSong)
+
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            fetchSong()
+        }
+        , [songId])
 
     const [sound, setSound] = React.useState<Sound | null>(null)
     const [isPlaying, setIsPlaying] = React.useState<boolean>(true);
@@ -51,10 +66,12 @@ const PlayerWidget = () => {
 
 
     React.useEffect(() => {
-        //play the song
-        playCurrentSong();
+        if (song) {
+            playCurrentSong();;
+        }
 
-    }, [])
+
+    }, [song])
 
     const getProgress = () => {
         if (sound === null || duration === null || position === null) {
@@ -63,8 +80,12 @@ const PlayerWidget = () => {
         return (position / duration) * 100;
     }
 
+    if (!song) {
+        return null;
+    }
 
     return (
+
         <View style={styles.container}>
             <View style={[styles.progress, { width: `${getProgress()}%` }]} />
             <View style={styles.row}>

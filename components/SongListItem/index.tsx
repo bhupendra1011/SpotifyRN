@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { AppContext } from '../../AppContext'
 import { Song } from '../../types'
 import styles from "./styles"
 export type songListItemProps = {
@@ -8,14 +9,22 @@ export type songListItemProps = {
 
 const SongListItem = (props: songListItemProps) => {
     const { song } = props;
+    const { setSongId } = React.useContext(AppContext);
+    const onPlay = () => {
+        setSongId(song.id)
+
+
+    }
     return (
-        <View style={styles.container}>
-            <Image source={{ uri: song.imageUri }} style={styles.image} />
-            <View style={styles.rightContainer}>
-                <Text style={styles.title}>{song.title}</Text>
-                <Text style={styles.artist}>{song.artist}</Text>
+        <TouchableOpacity onPress={onPlay}>
+            <View style={styles.container}>
+                <Image source={{ uri: song.imageUri }} style={styles.image} />
+                <View style={styles.rightContainer}>
+                    <Text style={styles.title}>{song.title}</Text>
+                    <Text style={styles.artist}>{song.artist}</Text>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
